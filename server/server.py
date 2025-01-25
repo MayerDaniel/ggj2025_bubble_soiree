@@ -1,6 +1,7 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
+import json
 import os
 
 app = FastAPI()
@@ -18,13 +19,16 @@ async def get():
     return HTMLResponse(content=html_content)
 
 # WebSocket route
+# TODO: Implement singaling out the host from the guests
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     try:
         while True:
             data = await websocket.receive_text()
-            await websocket.send_text(f"Message received: {data}")
+            json_data = json.loads(data)
+            print(f"Message received: {json_data}")
+            await websocket.send_json(json_data)
     except WebSocketDisconnect:
         print("WebSocket disconnected")
 
