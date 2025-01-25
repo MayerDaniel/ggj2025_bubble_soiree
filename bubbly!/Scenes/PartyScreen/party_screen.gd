@@ -1,5 +1,10 @@
 extends Control
 
+@export var Promp_and_answers_scene : PackedScene
+@export var answer_card : PackedScene
+@export var poll_scene : PackedScene
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
