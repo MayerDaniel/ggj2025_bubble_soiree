@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnx7qe6xyj6yb"]
+
+[ext_resource type="PackedScene" uid="uid://bui47g1mffbt0" path="res://Scenes/PartyScreen/response_box.tscn" id="1_rsbs4"]
+
+[node name="Prompt&Answers" type="VBoxContainer"]
+
+[node name="PromptBox" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PromptBox"]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+text = "Lorem ipsum dollar test one two three Lorem ipsum dollar test one two three Lorem ipsum dollar test one two three Lorem ipsum dollar test one two three "
+fit_content = true
+
+[node name="ResponsesHFlow" type="HFlowContainer" parent="."]
+layout_mode = 2
+theme_override_constants/h_separation = 5
+last_wrap_alignment = 1
+
+[node name="ResponseBox" parent="ResponsesHFlow" instance=ExtResource("1_rsbs4")]
+layout_mode = 2
+
+[node name="ResponseBox2" parent="ResponsesHFlow" instance=ExtResource("1_rsbs4")]
+layout_mode = 2
+
+[node name="ResponseBox3" parent="ResponsesHFlow" instance=ExtResource("1_rsbs4")]
+layout_mode = 2

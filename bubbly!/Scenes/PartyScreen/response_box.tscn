@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bui47g1mffbt0"]
+
+[node name="ResponseBox" type="PanelContainer"]
+custom_minimum_size = Vector2(200, 50)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+text = "Example answer that is at least this long lol"
