@@ -14,7 +14,7 @@ func _ready() -> void:
 		await get_tree().create_timer(2).timeout
 
 		# Send data.
-		socket.send_text("Test packet")
+		#socket.send_text("Test packet")
 	pass # Replace with function body.
 
 
@@ -23,9 +23,21 @@ func _process(_delta: float) -> void:
 	socket.poll()
 	var state = socket.get_ready_state()
 	if state == WebSocketPeer.STATE_OPEN:
+		
+		#create_poll(question, array_of_answers, id)
+		#create_question(question, id)
+		#create_announcement(announcement)
+		#answer_question(id, answer)
+		#answer_poll(id, answer)
 		while socket.get_available_packet_count():
 			var _packet = socket.get_packet()
-			print("Packet: ", _packet)
+			var json_raw = _packet.get_string_from_utf8()
+			var json = JSON.new()
+			var error = json.parse(json_raw)
+			if error == OK:
+				var data_received = json.data
+				print(data_received['type'])
+			print("Packet: ", _packet.get_string_from_utf8())
 			#print("Packet: ", _packet.get_string_from_utf8())
 	elif state == WebSocketPeer.STATE_CLOSING:
 		# Keep polling to achieve proper close.
