@@ -76,6 +76,12 @@ async def websocket_endpoint(websocket: WebSocket):
                     answers = message_store[message_id]["responses"]
                     answers[str(json_data["data"]["answer"])]["count"] += 1
                     message_store[message_id]["responses"] = answers
+                json_data = {
+                    'type': 'response',
+                    'new_data':json_data["data"],
+                    'all_data': message_store[message_id]
+                }
+
             # Broadcast the message to all connected WebSockets
             pprint(message_store)
             await broadcast_message(json_data)
