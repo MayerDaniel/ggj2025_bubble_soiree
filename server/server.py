@@ -1,9 +1,16 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi.websockets import WebSocketState
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
+from pprint import pprint
+import json
 import os
 
 app = FastAPI()
+message_store = {}  # Dictionary to store messages with an int ID as the key
+message_id_counter = 1  # Counter for unique message IDs
+connected_websockets = set()  # Track all connected WebSocket clients
+
 
 # Mount the static folder for serving frontend files
 static_folder = "static"
@@ -18,15 +25,78 @@ async def get():
     return HTMLResponse(content=html_content)
 
 # WebSocket route
+# TODO: Implement singaling out the host from the guests
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
+    global message_store
+    global message_id_counter
+
     await websocket.accept()
+    connected_websockets.add(websocket)
+
     try:
         while True:
             data = await websocket.receive_text()
-            await websocket.send_text(f"Message received: {data}")
+            json_data = json.loads(data)
+
+            if json_data["type"] in {"question", "poll"}:
+                # Add a unique ID to the message
+                message_id = message_id_counter
+                json_data["id"] = message_id
+                if json_data["type"] == "question":
+                    message_store[message_id] = {
+                        "type": "question",
+                        "responses": []
+                    }
+                if json_data["type"] == "poll":
+                    message_store[message_id] = { 
+                        "type": "poll",
+                        "responses": {
+                            k: {
+                            "value": v, 
+                            "count": 0
+                            } for k,v in json_data["answers"].items() 
+                        }
+                    }
+                message_id_counter += 1
+                pprint(message_store)
+            
+            if json_data["type"] == "response":
+                # Find the message by ID and add the answer
+                message_id = json_data["data"]["target"]
+                if message_id not in message_store:
+                    continue
+                print(message_store[message_id])
+                if message_store[message_id]["type"] == "question":
+                    answers = message_store[message_id]["responses"]
+                    answers.append(json_data["data"]["answer"])
+                    message_store[message_id]["responses"] = answers
+                
+                elif message_store[message_id]["type"] == "poll":
+                    answers = message_store[message_id]["responses"]
+                    answers[str(json_data["data"]["answer"])]["count"] += 1
+                    message_store[message_id]["responses"] = answers
+            # Broadcast the message to all connected WebSockets
+            pprint(message_store)
+            await broadcast_message(json_data)
     except WebSocketDisconnect:
+        connected_websockets.remove(websocket)
         print("WebSocket disconnected")
+
+
+async def broadcast_message(message):
+    """Send a message to all connected WebSocket clients."""
+    disconnected_clients = []
+    for client in connected_websockets:
+        if client.client_state == WebSocketState.CONNECTED:
+            try:
+                await client.send_json(message)
+            except Exception:
+                disconnected_clients.append(client)
+
+    # Remove disconnected clients
+    for client in disconnected_clients:
+        connected_websockets.remove(client)
 
 if __name__ == "__main__":
     import uvicorn
