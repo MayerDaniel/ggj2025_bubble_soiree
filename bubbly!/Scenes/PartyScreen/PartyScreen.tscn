@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bj0wkw86tqi2k"]
+[gd_scene load_steps=7 format=3 uid="uid://bj0wkw86tqi2k"]
 
 [ext_resource type="Script" path="res://Scenes/PartyScreen/party_screen.gd" id="1_a2gm7"]
 [ext_resource type="PackedScene" uid="uid://dnx7qe6xyj6yb" path="res://Scenes/PartyScreen/prompt_and_answers.tscn" id="1_nx1ya"]
 [ext_resource type="Texture2D" uid="uid://c1qkxjrq47pex" path="res://Resources/Images/GGJ25_BGColor.png" id="2_3twpt"]
 [ext_resource type="Texture2D" uid="uid://bmur31kodch3" path="res://Resources/Images/GGJ25_9Slice.png" id="2_6awyq"]
+[ext_resource type="Script" path="res://Scenes/PartyScreen/WebSocketListener.gd" id="5_jateu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e63nl"]
 
@@ -64,3 +65,6 @@ theme_override_constants/separation = 10
 
 [node name="Prompt&Answers" parent="PanelContainer/MarginContainer/MarginContainer/HBoxContainer/BigBoard" instance=ExtResource("1_nx1ya")]
 layout_mode = 2
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("5_jateu")
