@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://dnknxjqk7y3cj"]
+[gd_scene load_steps=2 format=3 uid="uid://dnknxjqk7y3cj"]
+
+[ext_resource type="Texture2D" uid="uid://b4x4fsm8proap" path="res://icon.svg" id="1_i1t71"]
 
 [node name="StartMenu" type="Control"]
 layout_mode = 3
@@ -7,3 +9,79 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.446777, 0.446777, 0.446777, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="TextureButton3" type="TextureButton" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("1_i1t71")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/TextureButton3"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start Game!"
+
+[node name="GameButton" type="TextureButton" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("1_i1t71")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/GameButton"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Start Game!"
+
+[node name="TextureButton2" type="TextureButton" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("1_i1t71")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/TextureButton2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -45.5
+offset_right = 45.5
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Close Game"
+
+[node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
