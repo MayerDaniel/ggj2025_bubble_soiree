@@ -1,10 +1,13 @@
 extends Node
 
+@onready var party_screen = get_node("PartyScreen")
+
 
 @export var web_socket_url : String = "ws://127.0.0.1:8000/ws" ##this needs to specify the IPv4 localhost or else it takes ~20 seconds to connect per Godot engine issue #67969
 var socket : WebSocketPeer = WebSocketPeer.new()
 
 func create_question(question, id):
+	party_screen.create_question(question, id)
 	print("Question created! Question: %s, id: %s" % [question, id])
 	# Put actual logic here
 	pass

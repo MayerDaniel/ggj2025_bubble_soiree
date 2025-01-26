@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dnx7qe6xyj6yb" path="res://Scenes/PartyScreen/prompt_and_answers.tscn" id="1_nx1ya"]
 [ext_resource type="Texture2D" uid="uid://c1qkxjrq47pex" path="res://Resources/Images/GGJ25_BGColor.png" id="2_3twpt"]
 [ext_resource type="Texture2D" uid="uid://bmur31kodch3" path="res://Resources/Images/GGJ25_9Slice.png" id="2_6awyq"]
-[ext_resource type="Script" path="res://Scenes/PartyScreen/WebSocketListener.gd" id="5_jateu"]
+[ext_resource type="PackedScene" uid="uid://bui47g1mffbt0" path="res://Scenes/PartyScreen/response_box.tscn" id="3_4675d"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e63nl"]
 
@@ -16,6 +16,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_a2gm7")
+promp_and_answers_scene = ExtResource("1_nx1ya")
+answer_card = ExtResource("3_4675d")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -60,11 +62,9 @@ value = 50.0
 fill_mode = 3
 
 [node name="BigBoard" type="VBoxContainer" parent="PanelContainer/MarginContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="Prompt&Answers" parent="PanelContainer/MarginContainer/MarginContainer/HBoxContainer/BigBoard" instance=ExtResource("1_nx1ya")]
 layout_mode = 2
-
-[node name="Node" type="Node" parent="."]
-script = ExtResource("5_jateu")
