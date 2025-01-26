@@ -1,7 +1,7 @@
 extends Node
 
 
-@export var web_socket_url : String = "ws://localhost:8000/ws"
+@export var web_socket_url : String = "ws://127.0.0.1:8000/ws" ##this needs to specify the IPv4 localhost or else it takes ~20 seconds to connect per Godot engine issue #67969
 var socket : WebSocketPeer = WebSocketPeer.new()
 
 func create_question(question, id):
