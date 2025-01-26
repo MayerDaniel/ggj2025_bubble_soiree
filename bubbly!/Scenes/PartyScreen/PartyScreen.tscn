@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://bj0wkw86tqi2k"]
+[gd_scene load_steps=15 format=3 uid="uid://bj0wkw86tqi2k"]
 
 [ext_resource type="Script" path="res://Scenes/PartyScreen/party_screen.gd" id="1_a2gm7"]
 [ext_resource type="PackedScene" uid="uid://dnx7qe6xyj6yb" path="res://Scenes/PartyScreen/prompt_and_answers.tscn" id="1_nx1ya"]
 [ext_resource type="Texture2D" uid="uid://bmur31kodch3" path="res://Resources/Images/GGJ25_9Slice.png" id="2_6awyq"]
 [ext_resource type="PackedScene" uid="uid://bui47g1mffbt0" path="res://Scenes/PartyScreen/response_box.tscn" id="3_4675d"]
+[ext_resource type="PackedScene" uid="uid://dfek34rusmmlk" path="res://Scenes/AlertBox/alert_box.tscn" id="4_sf14s"]
 [ext_resource type="Texture2D" uid="uid://d1qgtrn4bykua" path="res://Resources/Images/GGJ25_Background.jpeg" id="5_logk2"]
 [ext_resource type="Texture2D" uid="uid://ihlnj6uevmuk" path="res://Resources/Images/GGJ25_Bubble.png" id="6_ks1hm"]
 [ext_resource type="Texture2D" uid="uid://b6kmlxwg6b56v" path="res://Resources/Images/GGJ25_Cutebubble.png" id="7_t20y0"]
@@ -31,6 +32,7 @@ grow_vertical = 2
 script = ExtResource("1_a2gm7")
 promp_and_answers_scene = ExtResource("1_nx1ya")
 answer_card = ExtResource("3_4675d")
+alert_box_preload = ExtResource("4_sf14s")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1

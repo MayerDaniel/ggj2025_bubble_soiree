@@ -1,6 +1,7 @@
 extends Node
 
 @onready var party_screen = get_node("PartyScreen")
+@onready var bubble = get_node("PartyScreen/PanelContainer/PlacementZone/Bubble&QR/MarginContainer/MarginContainer/ColorRect/BubbleBody")
 
 
 @export var web_socket_url : String = "ws://127.0.0.1:8000/ws" ##this needs to specify the IPv4 localhost or else it takes ~20 seconds to connect per Godot engine issue #67969
@@ -18,7 +19,7 @@ func create_poll(question, dict_of_answers, id):
 	pass
 
 func create_announcement(announcement):
-	print("Announcement created! Message: %s" % announcement)
+	party_screen.create_random_alert_box(announcement)
 	# Put actual logic here
 	pass
 
@@ -43,7 +44,6 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func new_activity():
-	var bubble = get_node("PartyScreen/PanelContainer/PlacementZone/Bubble&QR/MarginContainer/MarginContainer/ColorRect/BubbleBody")
 	bubble.scale += Vector2(bubble.shrink_rate, bubble.shrink_rate) * 2
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.

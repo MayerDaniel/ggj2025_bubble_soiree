@@ -57,5 +57,5 @@ func _process(delta: float) -> void:
 	else:
 		# Optional: Stop shrinking when the object is too small
 		scale = Vector2(0, 0)
-		queue_free()  # Optional: Remove the object when it shrinks to 0
+		#queue_free()  # Optional: Remove the object when it shrinks to 0
 		pass

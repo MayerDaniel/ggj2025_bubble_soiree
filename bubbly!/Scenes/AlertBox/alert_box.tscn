@@ -5,19 +5,12 @@
 
 [node name="AlertBox" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PromptBox" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 956.0
 offset_bottom = 106.0
 size_flags_vertical = 0
 
-[node name="NinePatchRect" type="NinePatchRect" parent="PromptBox"]
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 2
 offset_right = 956.0
 offset_bottom = 106.0
@@ -27,7 +20,7 @@ patch_margin_top = 30
 patch_margin_right = 28
 patch_margin_bottom = 30
 
-[node name="MarginContainer" type="Control" parent="PromptBox"]
+[node name="MarginContainer" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,7 +28,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="PromptBox/MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
 custom_minimum_size = Vector2(800, 0)
 layout_mode = 1
 anchors_preset = -1
@@ -50,7 +43,7 @@ text = "Lorem ipsum dollar test one two three Lorem ipsum dollar test one two th
 fit_content = true
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect2" type="TextureRect" parent="PromptBox/MarginContainer"]
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.00627615
