@@ -37,6 +37,7 @@
                     </select>
                     <div id="formContainer" class="mt-3"></div>
                     <button onclick="handleSend()" class="btn btn-primary mt-3">Send</button>
+                    <button onclick="blingee()" class="btn btn-primary mt-3">Add Blingee</button>
                 </div>
             </div>
             <div class="tab-pane" id="answer" role="tabpanel" aria-labelledby="answer-tab">
@@ -174,6 +175,10 @@
             };
             socket.send(JSON.stringify(message));
             document.getElementById("textInput").value = ""; // Clear the input after sending
+        }
+
+        function blingee(){
+            socket.send(JSON.stringify({type: "blingee"}));
         }
     
         function sendPoll() {
