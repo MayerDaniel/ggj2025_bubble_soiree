@@ -10,11 +10,11 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+# Called every frame. '_delta' is the elapsed time since the previous frame.
+func _process(_delta):
 	pass
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	vertical_auto_scroll_with_rescroll()
 	pass
 
@@ -25,6 +25,8 @@ func set_prompt_text(_text: String):
 
 func attach_answer_card(_node): 
 	answers_box.add_child(_node)
+	
+
 
 
 func vertical_auto_scroll_with_rescroll():
@@ -36,3 +38,4 @@ func vertical_auto_scroll_with_rescroll():
 		else:
 			current_scroll_value += 0.35
 			scroll_bar.value = current_scroll_value
+	else: scroll_bar.value = 0
