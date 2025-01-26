@@ -23,6 +23,7 @@ func create_announcement(announcement):
 	pass
 
 func log_response(id, answer):
+	party_screen.log_response(id, answer)
 	print("Response logged! id: %s, Answer: %s" % [id, answer])
 	# Put actual logic here
 	pass

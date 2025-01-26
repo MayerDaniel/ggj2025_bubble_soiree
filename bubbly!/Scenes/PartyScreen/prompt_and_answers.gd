@@ -15,3 +15,7 @@ func _process(delta):
 
 func set_prompt_text(_text: String):
 	prompt_text_label.text = _text
+
+
+func attach_answer_card(_node): 
+	answers_box.add_child(_node)

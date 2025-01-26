@@ -40,11 +40,20 @@ func create_announcement(announcement):
 	# Put actual logic here
 	pass
 
-func log_response(id, answer):
-	print("Response logged! id: %s, Answer: %s" % [id, answer])
+func log_response(_question_id, _answer_text):
+	var _prompt_node = get_prompt_node_by_id(_question_id)
+	var _new_answer = answer_card.instantiate()
+	_prompt_node.attach_answer_card(_new_answer)
+	_new_answer.set_answer_text(_answer_text)
+	
+	print("Response logged! id: %s, Answer: %s" % [_question_id, _answer_text])
 	# Put actual logic here
 	pass
 
+func get_prompt_node_by_id(_prompt_id: int):
+	for _node_id_pair in questions_with_id:
+		if _node_id_pair["id"] == _prompt_id:
+			return _node_id_pair["node"]
 
 
 var example_json : Dictionary = {

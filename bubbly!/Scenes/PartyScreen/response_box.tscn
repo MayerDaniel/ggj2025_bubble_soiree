@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bui47g1mffbt0"]
+[gd_scene load_steps=5 format=3 uid="uid://bui47g1mffbt0"]
 
+[ext_resource type="Script" path="res://Scenes/PartyScreen/response_box.gd" id="1_6dvmf"]
 [ext_resource type="Texture2D" uid="uid://bq4cl1p3qncy7" path="res://Resources/Images/GGJ25_Frame.png" id="1_m71t7"]
 [ext_resource type="Texture2D" uid="uid://c1qkxjrq47pex" path="res://Resources/Images/GGJ25_BGColor.png" id="2_wiye6"]
 
@@ -10,6 +11,7 @@ custom_minimum_size = Vector2(200, 50)
 offset_right = 336.0
 offset_bottom = 121.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_4ep7i")
+script = ExtResource("1_6dvmf")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 2
