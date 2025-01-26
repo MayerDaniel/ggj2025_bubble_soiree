@@ -61,9 +61,8 @@ metadata/_edit_use_anchors_ = true
 [node name="Prompt&Answers" parent="PanelContainer/HBoxContainer/BigBoard" instance=ExtResource("1_nx1ya")]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+[node name="VBoxContainer" type="Control" parent="PanelContainer/HBoxContainer"]
 layout_mode = 1
-anchors_preset = -1
 anchor_left = 0.766
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -72,9 +71,11 @@ grow_horizontal = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.417
+offset_bottom = -0.240021
 
 [node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/HBoxContainer/VBoxContainer/MarginContainer"]
-custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 texture = ExtResource("2_6awyq")
 patch_margin_left = 24
@@ -131,6 +132,9 @@ texture = ExtResource("8_0hp4f")
 
 [node name="QRCodeRect" type="TextureRect" parent="PanelContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+offset_top = 304.0
+offset_right = 300.0
+offset_bottom = 304.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
