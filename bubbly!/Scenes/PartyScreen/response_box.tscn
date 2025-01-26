@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bui47g1mffbt0"]
 
 [ext_resource type="Script" path="res://Scenes/PartyScreen/response_box.gd" id="1_6dvmf"]
-[ext_resource type="Texture2D" uid="uid://bq4cl1p3qncy7" path="res://Resources/Images/GGJ25_Frame.png" id="1_m71t7"]
+[ext_resource type="Texture2D" uid="uid://bmur31kodch3" path="res://Resources/Images/GGJ25_9Slice.png" id="2_nic83"]
 [ext_resource type="Texture2D" uid="uid://c1qkxjrq47pex" path="res://Resources/Images/GGJ25_BGColor.png" id="2_wiye6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4ep7i"]
@@ -15,8 +15,7 @@ script = ExtResource("1_6dvmf")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 2
-texture = ExtResource("1_m71t7")
-draw_center = false
+texture = ExtResource("2_nic83")
 patch_margin_left = 27
 patch_margin_top = 30
 patch_margin_right = 28
@@ -37,3 +36,4 @@ texture = ExtResource("2_wiye6")
 custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
 text = "Example answer that is at least this long lol"
+scroll_active = false

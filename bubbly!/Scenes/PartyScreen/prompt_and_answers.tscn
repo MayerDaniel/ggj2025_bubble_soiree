@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dnx7qe6xyj6yb"]
 
 [ext_resource type="Script" path="res://Scenes/PartyScreen/prompt_and_answers.gd" id="1_cu0iu"]
-[ext_resource type="Texture2D" uid="uid://bq4cl1p3qncy7" path="res://Resources/Images/GGJ25_Frame.png" id="1_vlqt6"]
 [ext_resource type="Texture2D" uid="uid://c1qkxjrq47pex" path="res://Resources/Images/GGJ25_BGColor.png" id="2_6t3ce"]
+[ext_resource type="Texture2D" uid="uid://bmur31kodch3" path="res://Resources/Images/GGJ25_9Slice.png" id="2_de1f8"]
 
 [node name="Prompt&Answers" type="VBoxContainer"]
 script = ExtResource("1_cu0iu")
@@ -13,8 +13,7 @@ size_flags_vertical = 0
 
 [node name="NinePatchRect" type="NinePatchRect" parent="PromptBox"]
 layout_mode = 2
-texture = ExtResource("1_vlqt6")
-draw_center = false
+texture = ExtResource("2_de1f8")
 patch_margin_left = 27
 patch_margin_top = 30
 patch_margin_right = 28
@@ -28,6 +27,7 @@ theme_override_constants/margin_right = 28
 theme_override_constants/margin_bottom = 30
 
 [node name="TextureRect" type="TextureRect" parent="PromptBox/MarginContainer"]
+visible = false
 layout_mode = 2
 texture = ExtResource("2_6t3ce")
 
