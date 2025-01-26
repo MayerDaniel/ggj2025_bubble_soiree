@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bj0wkw86tqi2k"]
+[gd_scene load_steps=14 format=3 uid="uid://bj0wkw86tqi2k"]
 
 [ext_resource type="Script" path="res://Scenes/PartyScreen/party_screen.gd" id="1_a2gm7"]
 [ext_resource type="PackedScene" uid="uid://dnx7qe6xyj6yb" path="res://Scenes/PartyScreen/prompt_and_answers.tscn" id="1_nx1ya"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b6kmlxwg6b56v" path="res://Resources/Images/GGJ25_Cutebubble.png" id="7_t20y0"]
 [ext_resource type="Script" path="res://Scenes/PartyScreen/bubble_body.gd" id="7_yqs12"]
 [ext_resource type="Texture2D" uid="uid://ctymbaducewy7" path="res://Resources/Images/GGJ25_BubbleSmall.png" id="8_0hp4f"]
+[ext_resource type="AudioStream" uid="uid://5uw0s66p1knb" path="res://Resources/Songs/title-theme.mp3" id="10_eh8i7"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yxrbm"]
 
@@ -142,3 +143,7 @@ offset_bottom = 304.0
 libraries = {
 "bubbleAnim": SubResource("AnimationLibrary_rqjof")
 }
+
+[node name="TitleSongPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_eh8i7")
+autoplay = true
