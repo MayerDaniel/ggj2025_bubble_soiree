@@ -45,6 +45,12 @@ async def get():
         html_content = file.read()
     return HTMLResponse(content=html_content)
 
+@app.get("/computer")
+async def get():
+    with open("computer.html", "r") as file:
+        html_content = file.read()
+    return HTMLResponse(content=html_content)
+
 # WebSocket route
 # TODO: Implement singaling out the host from the guests
 @app.websocket("/ws")

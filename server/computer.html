@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bubblin'</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+        body {
+            font-family: "Comic Neue" !important;
+            font-weight: 900 !important;
+            font-style: normal !important;
+            background-image: url("https://file.garden/ZWlUCY4S7Xz2vypS/archived%20backgrounds/animals/bghorse.gif") !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <img src="/static/qrcode.png" alt="QR Code" 
+                     style="position: fixed; bottom: 10px; right: 10px; width: 150px; height: auto;">
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        let socket;
+        // Store question and poll IDs in a map to track them
+        const questionTables = new Map();
+        function connect() {
+            socket = new WebSocket(`ws://${window.location.hostname}:8000/ws`);
+
+            socket.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                handleIncomingMessage(data);
+            };
+
+            socket.onclose = () => alert("WebSocket closed");
+        }
+
+        function create_question(question, id) {
+            console.log("create_question called with arguments:", question, id);
+
+            // Check if a table for this ID already exists
+            if (questionTables.has(id)) {
+                console.log(`Table already created for question ID: ${id}`);
+                return; // Skip if the table for this question already exists
+            }
+
+            // Create a new table element for this question
+            const questionTable = document.createElement('table');
+            
+            // Add some basic styling to the table for visibility
+            questionTable.style.width = '25%';
+            questionTable.style.border = '1px solid black';
+            questionTable.style.borderCollapse = 'collapse';
+            
+            // Set the table's position to be random on the screen
+            questionTable.style.position = 'absolute';
+            const randomLeft = (Math.random() * (window.innerWidth - (window.innerWidth/4)));
+            const randomTop = Math.random() * (window.innerHeight - (window.innerHeight/4));
+            questionTable.style.top = `${randomTop}px`;
+            questionTable.style.left = `${randomLeft}px`;
+
+            // Create the header row with the question
+            const headerRow = document.createElement('tr');
+            const headerCell = document.createElement('th');
+            headerCell.setAttribute('colspan', '2'); // Span across 2 columns for question and answers
+            headerCell.style.textAlign = 'left';
+            headerCell.style.padding = '10px';
+            headerCell.textContent = question; // Set the question text
+            headerRow.appendChild(headerCell);
+            questionTable.appendChild(headerRow);
+
+            // Store the table in the map with the id
+            questionTables.set(id, questionTable);
+            
+            // Add the table to the body of the document (or to a specific container)
+            document.body.appendChild(questionTable);
+            
+            // Log the stored table for this ID
+            console.log(`Table for question ID ${id} created.`);
+        }
+
+        function create_announcement(announcement) {
+            console.log("create_announcement called with argument:", announcement);
+
+            // Create a new div element
+            const announcementDiv = document.createElement('div');
+            
+            // Set the text content of the div to the announcement
+            announcementDiv.textContent = announcement;
+            
+            // Apply some styles to the div for visibility and animation
+            announcementDiv.style.position = 'absolute';
+            announcementDiv.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            announcementDiv.style.color = 'white';
+            announcementDiv.style.padding = '10px';
+            announcementDiv.style.borderRadius = '5px';
+            announcementDiv.style.fontSize = '16px';
+            announcementDiv.style.zIndex = '1000'; // Ensure it's on top of other content
+            announcementDiv.style.transition = 'opacity 15s'; // Set the transition for opacity
+
+            // Generate random position on the screen
+            const maxWidth = window.innerWidth - announcementDiv.offsetWidth;
+            const maxHeight = window.innerHeight - announcementDiv.offsetHeight;
+            
+            // Set random positions for top and left within the window's bounds
+            const randomLeft = (Math.random() * (window.innerWidth - (window.innerWidth/4)));
+            const randomTop = Math.random() * (window.innerHeight - (window.innerHeight/4));
+
+            // Position the div randomly
+            announcementDiv.style.left = `${randomLeft}px`;
+            announcementDiv.style.top = `${randomTop}px`;
+
+            // Append the div to the body of the document
+            document.body.appendChild(announcementDiv);
+
+            // Start the fade-out effect by changing the opacity
+            setTimeout(() => {
+                announcementDiv.style.opacity = '0'; // Fade out by setting opacity to 0
+            }, 5000); // Initiate the fade-out immediately after appending the div
+
+            // Remove the div from the DOM after the fade-out effect
+            setTimeout(() => {
+                announcementDiv.remove(); // Remove the div from the DOM
+            }, 20000); // Remove the div after 15 seconds
+        }
+
+        function create_poll(question, answers, id) {
+            console.log("create_poll called with arguments:", question, answers, id);
+            // Your actual logic here
+        }
+
+        function addAnswerRow(questionId, answerText) {
+            console.log(`addAnswerRow called with questionId: ${questionId}, answerText: ${answerText}`);
+
+            // Retrieve the table for the given questionId
+            const questionTable = questionTables.get(questionId);
+            if (!questionTable) {
+                console.error(`No table found for question ID ${questionId}`);
+                return;
+            }
+
+            // Create a new answer row and append it to the table
+            const answerRow = document.createElement('tr');
+            const answerCell = document.createElement('td');
+            answerCell.setAttribute('colspan', '2');
+            answerCell.style.textAlign = 'center';
+            answerCell.style.padding = '10px';
+            answerCell.textContent = answerText;
+            answerRow.appendChild(answerCell);
+            questionTable.appendChild(answerRow);
+
+            // Log the added answer
+            console.log(`Answer added to question ID ${questionId}: ${answerText}`);
+        }
+
+        function log_response(target, answer) {
+            console.log("log_response called with arguments:", target, answer);
+            // Your actual logic here
+            addAnswerRow(target, answer);
+        }
+
+        function handleIncomingMessage(data) {
+            const messagesContainer = document.getElementById("messages");
+            const questionId = data.id; // Use the ID provided by the backend
+            switch (data.type) {
+                case 'question':
+                    create_question(data.question, data.id);
+                    break;
+                case 'announcement':
+                    create_announcement(data.announcement);
+                    break;
+                case 'poll':
+                    create_poll(data.question, data.answers, data.id);
+                    break;
+                case 'response':
+                    log_response(data.new_data.target, data.new_data.answer);
+                    break;
+                default:
+                    // Handle unknown types if needed
+                    break;
+            }
+                
+        } 
+
+        connect();
+        
+        </script>
+</body>
