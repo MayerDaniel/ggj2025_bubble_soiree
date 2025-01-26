@@ -3,6 +3,7 @@ extends Control
 @export var promp_and_answers_scene : PackedScene
 @export var answer_card : PackedScene
 @export var poll_scene : PackedScene
+@export var alert_box_preload : PackedScene
 
 
 @onready var big_board : VBoxContainer = get_node("%BigBoard")
@@ -40,6 +41,8 @@ func create_announcement(announcement):
 	# Put actual logic here
 	pass
 
+
+
 func log_response(_question_id, _answer_text):
 	var _prompt_node = get_prompt_node_by_id(_question_id)
 	var _new_answer = answer_card.instantiate()
@@ -55,6 +58,12 @@ func get_prompt_node_by_id(_prompt_id: int):
 		if _node_id_pair["id"] == _prompt_id:
 			return _node_id_pair["node"]
 
+
+func create_random_alert_box(_alert_text: String):
+	var _new_alert = alert_box_preload.instantiate()
+	
+	
+	
 
 var example_json : Dictionary = {
 	"type": "poll",
