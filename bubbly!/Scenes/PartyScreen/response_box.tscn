@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bui47g1mffbt0"]
 
 [ext_resource type="Script" path="res://Scenes/PartyScreen/response_box.gd" id="1_6dvmf"]
-[ext_resource type="Texture2D" uid="uid://bmur31kodch3" path="res://Resources/Images/GGJ25_9Slice.png" id="2_nic83"]
+[ext_resource type="Texture2D" uid="uid://b72j1f7ov6577" path="res://Resources/Images/GGJ25_9sliceSpeechbubble.png" id="2_rb5j4"]
 [ext_resource type="Texture2D" uid="uid://c1qkxjrq47pex" path="res://Resources/Images/GGJ25_BGColor.png" id="2_wiye6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4ep7i"]
@@ -15,7 +15,7 @@ script = ExtResource("1_6dvmf")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 2
-texture = ExtResource("2_nic83")
+texture = ExtResource("2_rb5j4")
 patch_margin_left = 27
 patch_margin_top = 30
 patch_margin_right = 28
@@ -29,11 +29,13 @@ theme_override_constants/margin_right = 28
 theme_override_constants/margin_bottom = 30
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+visible = false
 layout_mode = 2
 texture = ExtResource("2_wiye6")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
 custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
+theme_override_colors/default_color = Color(0.31982, 0.527251, 1, 1)
 text = "Example answer that is at least this long lol"
 scroll_active = false
