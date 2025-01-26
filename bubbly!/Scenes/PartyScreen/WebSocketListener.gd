@@ -42,7 +42,10 @@ func _ready() -> void:
 		#socket.send_text("Test packet")
 	pass # Replace with function body.
 
-
+func new_activity():
+	var bubble = get_node("PartyScreen/PanelContainer/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/NinePatchRect/MarginContainer/ColorRect/BubbleBody")
+	bubble.scale += Vector2(bubble.shrink_rate, bubble.shrink_rate) * 2
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	socket.poll()
@@ -55,6 +58,7 @@ func _process(_delta: float) -> void:
 			var json = JSON.new()
 			var error = json.parse(json_raw)
 			if error == OK:
+				new_activity()
 				var data_received = json.data
 				if 'type' not in data_received:
 					continue

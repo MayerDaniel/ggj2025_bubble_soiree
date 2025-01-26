@@ -7,6 +7,7 @@ extends Control
 
 
 @onready var big_board : VBoxContainer = get_node("%BigBoard")
+@onready var placement_zone : Control = get_node("PanelContainer/PlacementZone")
 
 var questions_with_id : Array[Dictionary]
 
@@ -61,6 +62,11 @@ func get_prompt_node_by_id(_prompt_id: int):
 
 func create_random_alert_box(_alert_text: String):
 	var _new_alert = alert_box_preload.instantiate()
+	placement_zone.add_child(_new_alert)
+	_new_alert.position.x = placement_zone.size.x/2
+	_new_alert.position.y = placement_zone.size.y/2
+	
+	
 	
 	
 	
