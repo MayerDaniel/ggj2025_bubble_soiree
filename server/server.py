@@ -5,12 +5,33 @@ from fastapi.responses import HTMLResponse
 from pprint import pprint
 import json
 import os
+import qrcode
+
+url = "http://192.168.0.5:8000"
 
 app = FastAPI()
 message_store = {}  # Dictionary to store messages with an int ID as the key
 message_id_counter = 1  # Counter for unique message IDs
 connected_websockets = set()  # Track all connected WebSocket clients
 
+# Generate a QR code for the URL
+# Create a QR Code object
+qr = qrcode.QRCode(
+    version=1,  # Controls the size of the QR Code (1 is the smallest)
+    error_correction=qrcode.constants.ERROR_CORRECT_L,  # Error correction level
+    box_size=10,  # Size of each box in the QR code grid
+    border=4,  # Thickness of the border (minimum is 4)
+)
+
+# Add data to the QR code
+qr.add_data(url)
+qr.make(fit=True)
+
+# Create an image of the QR code
+img = qr.make_image(fill_color="black", back_color="white")
+
+# Save the QR code as an image file
+img.save("static/qrcode.png")
 
 # Mount the static folder for serving frontend files
 static_folder = "static"
