@@ -3,6 +3,27 @@ extends Node
 
 @export var web_socket_url : String = "ws://localhost:8000/ws"
 var socket : WebSocketPeer = WebSocketPeer.new()
+
+func create_question(question, id):
+	print("Question created! Question: %s, id: %s" % [question, id])
+	# Put actual logic here
+	pass
+
+func create_poll(question, dict_of_answers, id):
+	print("Poll created! Question: %s, Answers: %s, id: %s" % [question, dict_of_answers, id])
+	# Put actual logic here
+	pass
+
+func create_announcement(announcement):
+	print("Announcement created! Message: %s" % announcement)
+	# Put actual logic here
+	pass
+
+func log_response(id, answer):
+	print("Response logged! id: %s, Answer: %s" % [id, answer])
+	# Put actual logic here
+	pass
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var err = socket.connect_to_url(web_socket_url)
@@ -24,11 +45,6 @@ func _process(_delta: float) -> void:
 	var state = socket.get_ready_state()
 	if state == WebSocketPeer.STATE_OPEN:
 		
-		#create_poll(question, array_of_answers, id)
-		#create_question(question, id)
-		#create_announcement(announcement)
-		#answer_question(id, answer)
-		#answer_poll(id, answer)
 		while socket.get_available_packet_count():
 			var _packet = socket.get_packet()
 			var json_raw = _packet.get_string_from_utf8()
@@ -36,7 +52,28 @@ func _process(_delta: float) -> void:
 			var error = json.parse(json_raw)
 			if error == OK:
 				var data_received = json.data
+				if 'type' not in data_received:
+					continue
 				print(data_received['type'])
+				match data_received['type']:
+					'question':
+						create_question(
+							data_received['question'],
+							data_received['id']
+							)
+					'announcement':
+						create_announcement(data_received['announcement'])
+					'poll':
+						create_poll(
+							data_received['question'],
+							data_received['answers'],
+							data_received['id']
+						)
+					'response':
+						log_response(
+							data_received['new_data']['target'],
+							data_received['new_data']['answer']
+						)
 			print("Packet: ", _packet.get_string_from_utf8())
 			#print("Packet: ", _packet.get_string_from_utf8())
 	elif state == WebSocketPeer.STATE_CLOSING:
