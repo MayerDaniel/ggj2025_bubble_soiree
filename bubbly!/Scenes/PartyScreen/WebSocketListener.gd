@@ -43,7 +43,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func new_activity():
-	var bubble = get_node("PartyScreen/PanelContainer/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/NinePatchRect/MarginContainer/ColorRect/BubbleBody")
+	var bubble = get_node("PartyScreen/PanelContainer/PlacementZone/Bubble&QR/MarginContainer/MarginContainer/ColorRect/BubbleBody")
 	bubble.scale += Vector2(bubble.shrink_rate, bubble.shrink_rate) * 2
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
