@@ -94,8 +94,15 @@ theme_override_constants/margin_bottom = 30
 layout_mode = 2
 color = Color(0.829885, 0.839971, 0.936103, 1)
 
+<<<<<<< HEAD
 [node name="BubbleBody" type="TextureRect" parent="PanelContainer/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/NinePatchRect/MarginContainer/ColorRect"]
+=======
+<<<<<<< HEAD
+>>>>>>> 53d15b8 (fix merge)
 [node name="BubbleBody" type="TextureRect" parent="PanelContainer/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/ColorRect"]
+=======
+[node name="BubbleBody" type="TextureRect" parent="PanelContainer/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/NinePatchRect/MarginContainer/ColorRect"]
+>>>>>>> f4e6bff (kind of bouncing bubble working)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -111,7 +118,11 @@ grow_vertical = 2
 texture = ExtResource("6_ks1hm")
 script = ExtResource("7_m7x41")
 
+<<<<<<< HEAD
 [node name="BubbleFace" type="TextureRect" parent="PanelContainer/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/ColorRect/BubbleBody"]
+=======
+[node name="BubbleFace" type="TextureRect" parent="PanelContainer/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/NinePatchRect/MarginContainer/ColorRect/BubbleBody"]
+>>>>>>> f4e6bff (kind of bouncing bubble working)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.19
