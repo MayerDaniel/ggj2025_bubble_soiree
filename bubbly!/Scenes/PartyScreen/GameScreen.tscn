@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3gjmg03sgh08"]
+[gd_scene load_steps=3 format=3 uid="uid://bl8y2qhc00jrq"]
 
 [ext_resource type="Script" path="res://Scenes/PartyScreen/WebSocketListener.gd" id="1_arbw2"]
 [ext_resource type="PackedScene" uid="uid://bj0wkw86tqi2k" path="res://Scenes/PartyScreen/PartyScreen.tscn" id="2_p5tgt"]

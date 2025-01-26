@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bj0wkw86tqi2k"]
+[gd_scene load_steps=13 format=3 uid="uid://bj0wkw86tqi2k"]
 
 [ext_resource type="Script" path="res://Scenes/PartyScreen/party_screen.gd" id="1_a2gm7"]
 [ext_resource type="PackedScene" uid="uid://dnx7qe6xyj6yb" path="res://Scenes/PartyScreen/prompt_and_answers.tscn" id="1_nx1ya"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bui47g1mffbt0" path="res://Scenes/PartyScreen/response_box.tscn" id="3_4675d"]
 [ext_resource type="Texture2D" uid="uid://d1qgtrn4bykua" path="res://Resources/Images/GGJ25_Background.jpeg" id="5_logk2"]
 [ext_resource type="Texture2D" uid="uid://ihlnj6uevmuk" path="res://Resources/Images/GGJ25_Bubble.png" id="6_ks1hm"]
+[ext_resource type="Script" path="res://Scenes/PartyScreen/bubble_body.gd" id="7_m7x41"]
 [ext_resource type="Texture2D" uid="uid://b6kmlxwg6b56v" path="res://Resources/Images/GGJ25_Cutebubble.png" id="7_t20y0"]
 [ext_resource type="Texture2D" uid="uid://ctymbaducewy7" path="res://Resources/Images/GGJ25_BubbleSmall.png" id="8_0hp4f"]
 
@@ -99,7 +100,7 @@ theme_override_constants/margin_bottom = 30
 layout_mode = 2
 color = Color(0.847059, 0.847059, 0.847059, 1)
 
-[node name="TextureRect2" type="TextureRect" parent="PanelContainer/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/NinePatchRect/MarginContainer/ColorRect"]
+[node name="BubbleBody" type="TextureRect" parent="PanelContainer/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/NinePatchRect/MarginContainer/ColorRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -113,8 +114,9 @@ offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_ks1hm")
+script = ExtResource("7_m7x41")
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/NinePatchRect/MarginContainer/ColorRect/TextureRect2"]
+[node name="BubbleFace" type="TextureRect" parent="PanelContainer/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/NinePatchRect/MarginContainer/ColorRect/BubbleBody"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.19
