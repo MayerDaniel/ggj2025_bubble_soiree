@@ -12,6 +12,23 @@
             font-style: normal !important;
             background-image: url("https://file.garden/ZWlUCY4S7Xz2vypS/archived%20backgrounds/animals/bghorse.gif") !important;
         }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background-color: #00fbff;
+            opacity: 0.5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .circle img {
+            width: 50%;
+            height: 50%;
+            object-fit: contain;
+            pointer-events: none; /* Prevents interaction with the image */
+        }
     </style>
 </head>
 <body>
@@ -27,6 +44,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
         let socket;
+        let circleElement;
+        let size = 400; // Initial size of the circle
+        let shrinkInterval;
         // Store question and poll IDs in a map to track them
         const questionTables = new Map();
         function connect() {
@@ -38,6 +58,116 @@
             };
 
             socket.onclose = () => alert("WebSocket closed");
+        }
+
+        function createShrinkingCircle() {
+            // Create the circle element
+            circleElement = document.createElement("div");
+            circleElement.className = "circle";
+
+            // Create the image element inside the circle
+            imageElement = document.createElement("img");
+            updateImage(); // Set the initial image based on size
+            circleElement.appendChild(imageElement);
+
+            // Append the circle to the body
+            updateCircleSize();
+            document.body.appendChild(circleElement);
+
+            // Start shrinking the circle slowly
+            shrinkInterval = setInterval(() => {
+                size -= 1; // Decrease size by 1px
+                if (size <= 0) {
+                    clearInterval(shrinkInterval); // Stop shrinking when size is 0
+                    size = 0;
+                }
+                updateCircleSize();
+                updateImage();
+            }, 100); // Shrinks every 100ms
+        }
+
+        function updateImage() {
+            if (!imageElement) return;
+            if (size <= 200) {
+                imageElement.src = "/static/sad.png"; // Replace with the path to your small image
+            } else if (size > 200 && size <= 400) {
+                imageElement.src = "/static/normal.png"; // Replace with the path to your medium image
+            } else {
+                imageElement.src = "/static/happy.png"; // Replace with the path to your large image
+            }
+        }
+
+         // Function to increase the size of the circle slightly
+         function increaseCircleSize() {
+            size += 20; // Increase size by 20px
+            if (size > 0 && !shrinkInterval) {
+                // Restart shrinking if it had stopped
+                createShrinkingCircle();
+            }
+            updateCircleSize();
+        }
+
+        // Helper function to update the circle's size and position
+        function updateCircleSize() {
+            if (!circleElement) return;
+            circleElement.style.width = size + "px";
+            circleElement.style.height = size + "px";
+            circleElement.style.left = `calc(50% - ${size / 2}px)`;
+            circleElement.style.top = `calc(50% - ${size / 2}px)`;
+        }
+
+        function createBouncingImage(imageSrc) {
+            // Create the image element
+            const img = document.createElement("img");
+            img.src = imageSrc;
+            img.style.position = "absolute";
+            img.style.width = "100px"; // Set the size of the image
+            img.style.height = "100px";
+            img.style.left = "10px";
+            img.style.top = "10px";
+            img.style.transition = 'opacity 15s'; // Set the transition for opacity
+            document.body.appendChild(img);
+
+            // Random initial direction and speed
+            let dx = Math.random() * 2 + 2; // Horizontal speed (2-6 px per frame)
+            let dy = Math.random() * 2 + 2; // Vertical speed (2-6 px per frame)
+
+            // Ensure direction is random (positive or negative)
+            dx *= Math.random() < 0.5 ? 1 : -1;
+            dy *= Math.random() < 0.5 ? 1 : -1;
+
+            setTimeout(() => {
+                img.style.opacity = '0'; // Fade out by setting opacity to 0
+            }, 1000); // Initiate the fade-out immediately after appending the div
+
+            setTimeout(() => {
+                img.remove(); // Remove the div from the DOM
+            }, 20000); // Remove the div after 15 seconds
+
+            // Animation loop
+            function animate() {
+                const screenWidth = window.screen.width - 5;
+                const screenHeight = window.screen.height - 210;
+                const rect = img.getBoundingClientRect();
+
+                // Reverse direction if hitting a boundary
+                if (rect.left <= 0 || rect.right >= screenWidth) {
+                    dx = -dx; // Reverse horizontal direction
+                }
+                if (rect.top <= 0 || rect.bottom >= screenHeight) {
+                    dy = -dy; // Reverse vertical direction
+                }
+
+                // Move the image
+                img.style.left = rect.left + dx + "px";
+                img.style.top = rect.top + dy + "px";
+
+                // Request the next animation frame
+                requestAnimationFrame(animate);
+            }
+
+            // Start the animation
+            animate();
         }
 
         function create_question(question, id) {
@@ -167,6 +297,7 @@
         function handleIncomingMessage(data) {
             const messagesContainer = document.getElementById("messages");
             const questionId = data.id; // Use the ID provided by the backend
+            increaseCircleSize();
             switch (data.type) {
                 case 'question':
                     create_question(data.question, data.id);
@@ -180,6 +311,16 @@
                 case 'response':
                     log_response(data.new_data.target, data.new_data.answer);
                     break;
+                case 'blingee':
+                    imageArray = [
+                        'https://img1.picmix.com/output/pic/normal/1/7/6/8/12368671_6ebd8.gif', 
+                        'https://img1.picmix.com/output/pic/normal/4/4/4/8/12368444_bd70a.gif',
+                        'https://i0.wp.com/chickenparmenides.wordpress.com/wp-content/uploads/2016/12/588273770_191783.gif?w=4000&h=&ssl=1',
+                        'https://i0.wp.com/chickenparmenides.wordpress.com/wp-content/uploads/2016/12/601850585_1131054.gif?w=4000&h=&crop=1&ssl=1',
+                        'https://i0.wp.com/chickenparmenides.wordpress.com/wp-content/uploads/2016/12/806414619_1548173.gif?w=4000&h=&crop=1&ssl=1',
+                        'https://i0.wp.com/chickenparmenides.wordpress.com/wp-content/uploads/2016/12/tumblr_lu7ow75mdm1qzikhfo1_400.gif?w=4000&h=&ssl=1']
+                    createBouncingImage(imageArray[Math.floor(Math.random() * imageArray.length)]);
+                    break;
                 default:
                     // Handle unknown types if needed
                     break;
@@ -188,6 +329,7 @@
         } 
 
         connect();
+        createShrinkingCircle();
         
         </script>
 </body>
