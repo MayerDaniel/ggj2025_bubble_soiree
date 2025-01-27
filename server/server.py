@@ -6,8 +6,28 @@ from pprint import pprint
 import json
 import os
 import qrcode
+import socket
+import psutil
 
-url = "http://192.168.0.5:8000"
+def get_local_ip_starting_with(prefix="192.168"):
+    # Retrieve all network interfaces and their IP addresses
+    interfaces = psutil.net_if_addrs()
+    
+    for interface_name, interface_addresses in interfaces.items():
+        for address in interface_addresses:
+            if address.family == socket.AF_INET:  # Check for IPv4 addresses
+                ip_address = address.address
+                if ip_address.startswith(prefix):
+                    return ip_address
+    
+    return None  # Return None if no matching IP is found
+
+ip_address = get_local_ip_starting_with("192.168")
+print(f"Starting server at {ip_address}:8000")
+if ip_address is None:
+    ip_address = "192.168.0.5"
+
+url = f"http://{ip_address}:8000"
 
 app = FastAPI()
 message_store = {}  # Dictionary to store messages with an int ID as the key

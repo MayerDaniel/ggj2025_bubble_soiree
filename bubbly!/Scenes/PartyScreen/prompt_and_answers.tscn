@@ -38,6 +38,12 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "Lorem ipsum dollar test one two three Lorem ipsum dollar test one two three Lorem ipsum dollar test one two three Lorem ipsum dollar test one two three "
 fit_content = true
 
-[node name="AnswersFlowBox" type="HFlowContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
-last_wrap_alignment = 1
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="AnswersBox" type="HBoxContainer" parent="ScrollContainer"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2

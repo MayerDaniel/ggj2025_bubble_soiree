@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://cakgh245ar43f"]
+
+[ext_resource type="Script" path="res://Scenes/PartyScreen/big_board.gd" id="1_kljhh"]
+
+[node name="BigBoard" type="VBoxContainer"]
+clip_contents = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+script = ExtResource("1_kljhh")
+metadata/_edit_use_anchors_ = true
+
+[node name="VScrollBar" type="VScrollBar" parent="."]
+layout_mode = 2
+step = 0.1
+allow_greater = true
+allow_lesser = true

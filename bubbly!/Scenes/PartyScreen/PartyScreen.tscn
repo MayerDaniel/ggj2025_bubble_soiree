@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bj0wkw86tqi2k"]
+[gd_scene load_steps=16 format=3 uid="uid://bj0wkw86tqi2k"]
 
 [ext_resource type="Script" path="res://Scenes/PartyScreen/party_screen.gd" id="1_a2gm7"]
 [ext_resource type="PackedScene" uid="uid://dnx7qe6xyj6yb" path="res://Scenes/PartyScreen/prompt_and_answers.tscn" id="1_nx1ya"]
@@ -6,11 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://bui47g1mffbt0" path="res://Scenes/PartyScreen/response_box.tscn" id="3_4675d"]
 [ext_resource type="PackedScene" uid="uid://dfek34rusmmlk" path="res://Scenes/AlertBox/alert_box.tscn" id="4_sf14s"]
 [ext_resource type="Texture2D" uid="uid://d1qgtrn4bykua" path="res://Resources/Images/GGJ25_Background.jpeg" id="5_logk2"]
+[ext_resource type="PackedScene" uid="uid://cakgh245ar43f" path="res://Scenes/BigBoard/big_board.tscn" id="6_3wm0f"]
 [ext_resource type="Texture2D" uid="uid://ihlnj6uevmuk" path="res://Resources/Images/GGJ25_Bubble.png" id="6_ks1hm"]
 [ext_resource type="Texture2D" uid="uid://b6kmlxwg6b56v" path="res://Resources/Images/GGJ25_Cutebubble.png" id="7_t20y0"]
 [ext_resource type="Script" path="res://Scenes/PartyScreen/bubble_body.gd" id="7_yqs12"]
 [ext_resource type="Texture2D" uid="uid://ctymbaducewy7" path="res://Resources/Images/GGJ25_BubbleSmall.png" id="8_0hp4f"]
-[ext_resource type="AudioStream" uid="uid://5uw0s66p1knb" path="res://Resources/Songs/title-theme.mp3" id="10_eh8i7"]
+[ext_resource type="AudioStream" uid="uid://bnlmmrgdfyeeo" path="res://Resources/Songs/gameplay-song.mp3" id="12_a6ael"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yxrbm"]
 
@@ -49,20 +50,6 @@ texture = ExtResource("5_logk2")
 expand_mode = 2
 
 [node name="PlacementZone" type="Control" parent="PanelContainer"]
-layout_mode = 2
-
-[node name="BigBoard" type="VBoxContainer" parent="PanelContainer/PlacementZone"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.746875
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 10
-metadata/_edit_use_anchors_ = true
-
-[node name="Prompt&Answers" parent="PanelContainer/PlacementZone/BigBoard" instance=ExtResource("1_nx1ya")]
 layout_mode = 2
 
 [node name="Bubble&QR" type="Control" parent="PanelContainer/PlacementZone"]
@@ -141,11 +128,22 @@ offset_top = 304.0
 offset_right = 300.0
 offset_bottom = 304.0
 
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/PlacementZone"]
+layout_mode = 0
+offset_right = 979.0
+offset_bottom = 716.0
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="BigBoard" parent="PanelContainer/PlacementZone/ScrollContainer" instance=ExtResource("6_3wm0f")]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "bubbleAnim": SubResource("AnimationLibrary_rqjof")
 }
 
 [node name="TitleSongPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_eh8i7")
+stream = ExtResource("12_a6ael")
 autoplay = true
