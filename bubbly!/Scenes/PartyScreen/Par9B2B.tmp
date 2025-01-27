@@ -1,0 +1,151 @@
+[gd_scene load_steps=15 format=3 uid="uid://bj0wkw86tqi2k"]
+
+[ext_resource type="Script" path="res://Scenes/PartyScreen/party_screen.gd" id="1_a2gm7"]
+[ext_resource type="PackedScene" uid="uid://dnx7qe6xyj6yb" path="res://Scenes/PartyScreen/prompt_and_answers.tscn" id="1_nx1ya"]
+[ext_resource type="Texture2D" uid="uid://bmur31kodch3" path="res://Resources/Images/GGJ25_9Slice.png" id="2_6awyq"]
+[ext_resource type="PackedScene" uid="uid://bui47g1mffbt0" path="res://Scenes/PartyScreen/response_box.tscn" id="3_4675d"]
+[ext_resource type="PackedScene" uid="uid://dfek34rusmmlk" path="res://Scenes/AlertBox/alert_box.tscn" id="4_sf14s"]
+[ext_resource type="Texture2D" uid="uid://d1qgtrn4bykua" path="res://Resources/Images/GGJ25_Background.jpeg" id="5_logk2"]
+[ext_resource type="Texture2D" uid="uid://ihlnj6uevmuk" path="res://Resources/Images/GGJ25_Bubble.png" id="6_ks1hm"]
+[ext_resource type="Texture2D" uid="uid://b6kmlxwg6b56v" path="res://Resources/Images/GGJ25_Cutebubble.png" id="7_t20y0"]
+[ext_resource type="Script" path="res://Scenes/PartyScreen/bubble_body.gd" id="7_yqs12"]
+[ext_resource type="Texture2D" uid="uid://ctymbaducewy7" path="res://Resources/Images/GGJ25_BubbleSmall.png" id="8_0hp4f"]
+[ext_resource type="AudioStream" uid="uid://5uw0s66p1knb" path="res://Resources/Songs/title-theme.mp3" id="10_eh8i7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yxrbm"]
+
+[sub_resource type="Animation" id="Animation_q1jwu"]
+resource_name = "float"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rqjof"]
+_data = {
+"float": SubResource("Animation_q1jwu")
+}
+
+[node name="PartyScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a2gm7")
+promp_and_answers_scene = ExtResource("1_nx1ya")
+answer_card = ExtResource("3_4675d")
+alert_box_preload = ExtResource("4_sf14s")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_yxrbm")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer"]
+layout_mode = 2
+texture = ExtResource("5_logk2")
+expand_mode = 2
+
+[node name="PlacementZone" type="Control" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="BigBoard" type="VBoxContainer" parent="PanelContainer/PlacementZone"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.746875
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+metadata/_edit_use_anchors_ = true
+
+[node name="Prompt&Answers" parent="PanelContainer/PlacementZone/BigBoard" instance=ExtResource("1_nx1ya")]
+layout_mode = 2
+
+[node name="Bubble&QR" type="Control" parent="PanelContainer/PlacementZone"]
+layout_mode = 1
+anchor_left = 0.766
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.480042
+grow_horizontal = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/PlacementZone/Bubble&QR"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.417
+offset_bottom = -0.240021
+
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/PlacementZone/Bubble&QR/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_6awyq")
+patch_margin_left = 24
+patch_margin_top = 18
+patch_margin_right = 28
+patch_margin_bottom = 14
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/PlacementZone/Bubble&QR/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/PlacementZone/Bubble&QR/MarginContainer/MarginContainer"]
+layout_mode = 2
+color = Color(0.829885, 0.839971, 0.936103, 1)
+
+[node name="BubbleBody" type="TextureRect" parent="PanelContainer/PlacementZone/Bubble&QR/MarginContainer/MarginContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ks1hm")
+script = ExtResource("7_yqs12")
+
+[node name="BubbleFace" type="TextureRect" parent="PanelContainer/PlacementZone/Bubble&QR/MarginContainer/MarginContainer/ColorRect/BubbleBody"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.19
+anchor_top = 0.28
+anchor_right = 0.725
+anchor_bottom = 0.69
+offset_right = 10.5
+offset_bottom = 7.99999
+grow_horizontal = 2
+texture = ExtResource("7_t20y0")
+
+[node name="TinyBubble" type="TextureRect" parent="PanelContainer/PlacementZone/Bubble&QR/MarginContainer/MarginContainer/ColorRect/BubbleBody/BubbleFace"]
+visible = false
+layout_mode = 2
+offset_left = -89.0
+offset_top = -98.0
+offset_right = 151.0
+offset_bottom = 142.0
+texture = ExtResource("8_0hp4f")
+
+[node name="QRCodeRect" type="TextureRect" parent="PanelContainer/PlacementZone/Bubble&QR"]
+layout_mode = 2
+offset_top = 304.0
+offset_right = 300.0
+offset_bottom = 304.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"bubbleAnim": SubResource("AnimationLibrary_rqjof")
+}
+
+[node name="TitleSongPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_eh8i7")
+autoplay = true

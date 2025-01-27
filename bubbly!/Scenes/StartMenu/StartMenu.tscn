@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnknxjqk7y3cj"]
+[gd_scene load_steps=7 format=3 uid="uid://dnknxjqk7y3cj"]
 
-[ext_resource type="Texture2D" uid="uid://b4x4fsm8proap" path="res://icon.svg" id="1_i1t71"]
+[ext_resource type="Script" path="res://Scenes/StartMenu/start_menu.gd" id="1_4btcs"]
+[ext_resource type="Texture2D" uid="uid://bfrakp48auaib" path="res://Resources/Images/GGJ25_Button.png" id="2_8ag20"]
+[ext_resource type="PackedScene" uid="uid://d3gjmg03sgh08" path="res://Scenes/PartyScreen/GameScreen.tscn" id="2_cynk6"]
+[ext_resource type="Texture2D" uid="uid://dpgir6l3tiyt7" path="res://Resources/Images/Untitled_Artwork_13.jpg" id="3_dhro1"]
+[ext_resource type="AudioStream" uid="uid://crbrhtniytexb" path="res://Resources/Songs/start-game-sound.mp3" id="5_eg67m"]
+[ext_resource type="AudioStream" uid="uid://5uw0s66p1knb" path="res://Resources/Songs/title-theme.mp3" id="6_4erh5"]
 
 [node name="StartMenu" type="Control"]
 layout_mode = 3
@@ -9,79 +14,73 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_4btcs")
+game_scene = ExtResource("2_cynk6")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.446777, 0.446777, 0.446777, 1)
+texture = ExtResource("3_dhro1")
+expand_mode = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
 alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-
-[node name="TextureButton3" type="TextureButton" parent="HBoxContainer/VBoxContainer"]
+[node name="StartButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 action_mode = 0
-texture_normal = ExtResource("1_i1t71")
+texture_normal = ExtResource("2_8ag20")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/TextureButton3"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/StartButton"]
 layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -11.5
-offset_bottom = 11.5
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Start Game!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="GameButton" type="TextureButton" parent="HBoxContainer/VBoxContainer"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VBoxContainer/HBoxContainer/StartButton"]
+stream = ExtResource("5_eg67m")
+
+[node name="QuitButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 action_mode = 0
-texture_normal = ExtResource("1_i1t71")
+texture_normal = ExtResource("2_8ag20")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/GameButton"]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Start Game!"
-
-[node name="TextureButton2" type="TextureButton" parent="HBoxContainer/VBoxContainer"]
-layout_mode = 2
-action_mode = 0
-texture_normal = ExtResource("1_i1t71")
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/TextureButton2"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/QuitButton"]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -45.5
-offset_right = 45.5
-offset_bottom = 23.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
 text = "Close Game"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_4erh5")
+volume_db = -6.0
+autoplay = true

@@ -5,12 +5,53 @@ from fastapi.responses import HTMLResponse
 from pprint import pprint
 import json
 import os
+import qrcode
+import socket
+import psutil
+
+def get_local_ip_starting_with(prefix="192.168"):
+    # Retrieve all network interfaces and their IP addresses
+    interfaces = psutil.net_if_addrs()
+    
+    for interface_name, interface_addresses in interfaces.items():
+        for address in interface_addresses:
+            if address.family == socket.AF_INET:  # Check for IPv4 addresses
+                ip_address = address.address
+                if ip_address.startswith(prefix):
+                    return ip_address
+    
+    return None  # Return None if no matching IP is found
+
+ip_address = get_local_ip_starting_with("192.168")
+print(f"Starting server at {ip_address}:8000")
+if ip_address is None:
+    ip_address = "192.168.0.5"
+
+url = f"http://{ip_address}:8000"
 
 app = FastAPI()
 message_store = {}  # Dictionary to store messages with an int ID as the key
 message_id_counter = 1  # Counter for unique message IDs
 connected_websockets = set()  # Track all connected WebSocket clients
 
+# Generate a QR code for the URL
+# Create a QR Code object
+qr = qrcode.QRCode(
+    version=1,  # Controls the size of the QR Code (1 is the smallest)
+    error_correction=qrcode.constants.ERROR_CORRECT_L,  # Error correction level
+    box_size=10,  # Size of each box in the QR code grid
+    border=4,  # Thickness of the border (minimum is 4)
+)
+
+# Add data to the QR code
+qr.add_data(url)
+qr.make(fit=True)
+
+# Create an image of the QR code
+img = qr.make_image(fill_color="black", back_color="white")
+
+# Save the QR code as an image file
+img.save("static/qrcode.png")
 
 # Mount the static folder for serving frontend files
 static_folder = "static"
@@ -21,6 +62,12 @@ app.mount("/static", StaticFiles(directory=static_folder), name="static")
 @app.get("/")
 async def get():
     with open("phone.html", "r") as file:
+        html_content = file.read()
+    return HTMLResponse(content=html_content)
+
+@app.get("/computer")
+async def get():
+    with open("computer.html", "r") as file:
         html_content = file.read()
     return HTMLResponse(content=html_content)
 
