@@ -18,6 +18,8 @@ func _process(_delta):
 	pass
 
 func _on_start_button_pressed():
+	var audio_player: AudioStreamPlayer = get_node("VBoxContainer/HBoxContainer/StartButton/AudioStreamPlayer")
+	
 	get_tree().change_scene_to_packed(game_scene)
 
 func _on_quit_button_pressed():

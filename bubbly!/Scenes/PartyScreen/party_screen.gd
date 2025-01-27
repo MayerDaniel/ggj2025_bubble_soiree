@@ -64,7 +64,9 @@ func create_random_alert_box(_alert_text: String):
 	var _new_alert = alert_box_preload.instantiate()
 	placement_zone.add_child(_new_alert)
 	_new_alert.position.x = ((placement_zone.size.x/2 - _new_alert.size.x/2))
-	_new_alert.position.y = ((placement_zone.size.y/2)) 
+	_new_alert.position.y = ((placement_zone.size.y/2) + randf_range(-250, 250)) 
+	_new_alert.set_text(_alert_text)
+	_new_alert.apply_random_animation()
 	
 	
 	
