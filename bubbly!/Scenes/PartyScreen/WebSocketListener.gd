@@ -66,12 +66,10 @@ func _http_request_completed(result, response_code, headers, body):
 	var texture = ImageTexture.create_from_image(image)
 
 	# Display the image in a TextureRect node.
-	var texture_rect = TextureRect.new()
-	add_child(texture_rect)
+	var texture_rect = party_screen.get_node("PanelContainer/PlacementZone/Bubble&QR/QRCodeRect")
 	texture_rect.texture = texture
 
 func new_activity():
-	var bubble = get_node("PartyScreen/PanelContainer/PlacementZone/Bubble&QR/MarginContainer/MarginContainer/ColorRect/BubbleBody")
 	bubble.scale += Vector2(bubble.shrink_rate, bubble.shrink_rate) * 2
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
