@@ -124,9 +124,14 @@ texture = ExtResource("8_0hp4f")
 
 [node name="QRCodeRect" type="TextureRect" parent="PanelContainer/PlacementZone/Bubble&QR"]
 layout_mode = 2
-offset_top = 304.0
-offset_right = 300.0
-offset_bottom = 304.0
+anchor_top = 0.418
+anchor_right = 1.0
+anchor_bottom = 0.818056
+offset_left = -3.0
+offset_top = 0.039978
+offset_right = -6.10352e-05
+offset_bottom = 3.0
+metadata/_edit_use_anchors_ = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/PlacementZone"]
 layout_mode = 0
