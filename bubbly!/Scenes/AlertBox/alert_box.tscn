@@ -12,11 +12,11 @@ _data = {
 "RESET": SubResource("Animation_igwwf")
 }
 
+[sub_resource type="Animation" id="Animation_ia7fq"]
+
 [sub_resource type="Animation" id="Animation_mjv7s"]
 length = 5.0
 step = 0.1
-
-[sub_resource type="Animation" id="Animation_ia7fq"]
 
 [sub_resource type="Animation" id="Animation_hereo"]
 
@@ -66,6 +66,7 @@ offset_top = 26.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
 text = "Lorem ipsum dollar test one two three Lorem ipsum dollar test one two three Lorem ipsum dollar test one two three Lorem ipsum dollar test one two three "
 fit_content = true
 

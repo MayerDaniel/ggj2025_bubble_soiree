@@ -134,9 +134,12 @@ offset_bottom = 3.0
 metadata/_edit_use_anchors_ = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/PlacementZone"]
-layout_mode = 0
-offset_right = 979.0
-offset_bottom = 716.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.765
+anchor_bottom = 0.994
+offset_right = -0.200073
+offset_bottom = 0.320007
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 

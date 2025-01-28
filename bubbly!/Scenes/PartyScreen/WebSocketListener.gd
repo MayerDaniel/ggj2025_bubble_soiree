@@ -70,7 +70,7 @@ func _http_request_completed(result, response_code, headers, body):
 	texture_rect.texture = texture
 
 func new_activity():
-	bubble.scale += Vector2(bubble.shrink_rate, bubble.shrink_rate) * 2
+	bubble.scale += Vector2(bubble.shrink_rate, bubble.shrink_rate) * 3
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

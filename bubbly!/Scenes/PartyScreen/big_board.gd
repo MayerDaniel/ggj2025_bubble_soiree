@@ -34,7 +34,7 @@ func attach_answer_card(_node):
 func vertical_auto_scroll_with_rescroll():
 	var scroll_bar = v_scroll_bar
 	var current_scroll_value: float = scroll_bar.value
-	if scroll_bar.max_value > 700: ##this value is dependant on the size of the box and will need to be tweaked
+	if scroll_bar.max_value > 700 * 3: ##this value is dependant on the size of the box and will need to be tweaked
 		if current_scroll_value >= scroll_bar.max_value:
 			scroll_bar.value = scroll_bar.min_value
 		else:
