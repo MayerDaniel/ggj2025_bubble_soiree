@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/StartMenu/start_menu.gd" id="1_4btcs"]
 [ext_resource type="Texture2D" uid="uid://bfrakp48auaib" path="res://Resources/Images/GGJ25_Button.png" id="2_8ag20"]
-[ext_resource type="PackedScene" path="res://Scenes/PartyScreen/GameScreen.tscn" id="2_cynk6"]
+[ext_resource type="PackedScene" uid="uid://d3gjmg03sgh08" path="res://Scenes/PartyScreen/GameScreen.tscn" id="2_cynk6"]
 [ext_resource type="Texture2D" uid="uid://dpgir6l3tiyt7" path="res://Resources/Images/Untitled_Artwork_13.jpg" id="3_dhro1"]
 [ext_resource type="AudioStream" uid="uid://crbrhtniytexb" path="res://Resources/Songs/start-game-sound.mp3" id="5_eg67m"]
 [ext_resource type="AudioStream" uid="uid://5uw0s66p1knb" path="res://Resources/Songs/title-theme.mp3" id="6_4erh5"]
