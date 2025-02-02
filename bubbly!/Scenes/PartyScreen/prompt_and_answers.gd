@@ -10,10 +10,12 @@ extends VBoxContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	prompt_text_label.get_v_scroll_bar().visible = false
 	prompt_text_label.get_v_scroll_bar().allow_greater = true
 	prompt_text_label.get_v_scroll_bar().step = 0.01
 	answers_scroll_container.get_h_scroll_bar().allow_greater = true
 	answers_scroll_container.get_h_scroll_bar().step = 0.01
+	
 	
 	pass # Replace with function body.
 
@@ -42,12 +44,20 @@ func vertical_auto_scroll_with_rescroll():
 	var scroll_bar = prompt_text_label.get_v_scroll_bar()
 	var current_scroll_value: float = scroll_bar.value
 	if scroll_bar.max_value > 50: ##this value is dependant on the size of the box and will need to be tweaked
+		prompt_text_label.fit_content = false
+		prompt_text_label.custom_minimum_size.y = 65
+		
+		
 		if current_scroll_value >= scroll_bar.max_value:
 			scroll_bar.value = scroll_bar.min_value
 		else:
 			current_scroll_value += 0.35
 			scroll_bar.value = current_scroll_value
-	else: scroll_bar.value = 0
+	else: 
+		scroll_bar.value = 0
+		prompt_text_label.fit_content = true
+		prompt_text_label.custom_minimum_size.y = 0
+		
 
 
 
