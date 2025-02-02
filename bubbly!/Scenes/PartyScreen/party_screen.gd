@@ -8,6 +8,8 @@ extends Control
 
 @onready var big_board : VBoxContainer = get_node("%BigBoard")
 @onready var placement_zone : Control = get_node("PanelContainer/PlacementZone")
+@onready var window : Window = get_window()
+
 
 var questions_with_id : Array[Dictionary]
 

@@ -3,6 +3,8 @@ extends VBoxContainer
 @onready var scroll_container : ScrollContainer = get_parent()
 @onready var v_scroll_bar = scroll_container.get_v_scroll_bar()
 
+var window_size : Vector2i
+
 
 func _ready():
 	v_scroll_bar.allow_greater = true
@@ -15,6 +17,7 @@ func _process(_delta):
 	pass
 	
 func _physics_process(_delta):
+	window_size = get_window().size
 	vertical_auto_scroll_with_rescroll()
 	pass
 
@@ -34,7 +37,7 @@ func attach_answer_card(_node):
 func vertical_auto_scroll_with_rescroll():
 	var scroll_bar = v_scroll_bar
 	var current_scroll_value: float = scroll_bar.value
-	if scroll_bar.max_value > 700 * 3: ##this value is dependant on the size of the box and will need to be tweaked
+	if scroll_bar.max_value > (window_size.y * 0.95): ##this value is dependant on the size of the box and will need to be tweaked
 		if current_scroll_value >= scroll_bar.max_value:
 			scroll_bar.value = scroll_bar.min_value
 		else:
